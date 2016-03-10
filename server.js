@@ -1,7 +1,3 @@
-require('dotenv').load({
-    path: __dirname + '/.env'
-});
-
 var request = require('request');
 var cheerio = require('cheerio');
 var http = require('http');
