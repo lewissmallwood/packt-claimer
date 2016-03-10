@@ -1,6 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var http = require('http');
+var url = require('url');
 
 const PORT = 80;
 http.createServer(handleRequest).listen(PORT);
@@ -19,15 +20,18 @@ function handleRequest(req, response) {
       var getBookUrl;
       var bookTitle;
 
+      // Take the email and password for Packt via a very unsecure GET request and use it.
+      var query = url.parse(req.url, true).query;
+      loginDetails.email = query.email;
+      loginDetails.password = query.password;
+
       // We need cookies for that, therefore let's turn JAR on
       request = request.defaults({
           jar: true
       });
 
-      loginDetails.email = "";
-      loginDetails.password = "";
-
       console.log('----------- Packt Grab Started -----------');
+
       request(url, function(err, res, body) {
           if (err) {
               console.error('Request failed');
@@ -59,8 +63,7 @@ function handleRequest(req, response) {
               var $ = cheerio.load(body);
               var loginFailed = $("div.error:contains('"+loginError+"')");
               if (loginFailed.length) {
-                  console.error('Login failed, please check your email address and password');
-                  console.log('Login failed, please check your email address and password');
+                  console.error('Login failed, please check your email address and password.');
                   console.log('----------- Packt Grab Done --------------');
                   return;
               }
