@@ -44,7 +44,7 @@ function handleRequest(req, response) {
           if (err) {
               console.error('Request failed');
               response.writeHead(200, {'Content-Type': 'text/plain'});
-              response.write('Something broke...\n');
+              response.end('Something broke...\n');
               console.log('----------- Packt Grab Done --------------');
               return;
           }
@@ -68,7 +68,7 @@ function handleRequest(req, response) {
               if (err) {
                   console.error('Login failed');
                   response.writeHead(200, {'Content-Type': 'text/plain'});
-                  response.write('Logining into your Packt account failed.\n');
+                  response.end('Logining into your Packt account failed.\n');
                   console.log('----------- Packt Grab Done --------------');
                   return;
               };
@@ -77,7 +77,7 @@ function handleRequest(req, response) {
               if (loginFailed.length) {
                   console.error('Login failed, please check your email address and password.');
                   response.writeHead(200, {'Content-Type': 'text/plain'});
-                  response.write('Logining into your Packt account failed. Perhaps no credentials were supplied?\n');
+                  response.end('Logining into your Packt account failed. Perhaps no credentials were supplied?\n');
                   console.log('----------- Packt Grab Done --------------');
                   return;
               }
@@ -86,7 +86,7 @@ function handleRequest(req, response) {
                   if (err) {
                       console.error('Request Error');
                       response.writeHead(200, {'Content-Type': 'text/plain'});
-                      response.write('An unexpected request error occurred.\n');
+                      response.end('An unexpected request error occurred.\n');
                       console.log('----------- Packt Grab Done --------------');
                       return;
                   }
@@ -95,7 +95,7 @@ function handleRequest(req, response) {
 
                   console.log('Book Title: ' + bookTitle);
                   response.writeHead(200, {'Content-Type': 'text/plain'});
-                  response.write("The book '"+ bookTitle +"' was claimed successfully for "+ loginDetails.email +".\n");
+                  response.end("The book '"+ bookTitle +"' was claimed successfully for "+ loginDetails.email +".\n");
                   console.log('Claim URL: https://www.packtpub.com' + getBookUrl);
                   console.log('----------- Packt Grab Done --------------');
               });
