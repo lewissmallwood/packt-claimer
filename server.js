@@ -3,11 +3,7 @@ var cheerio = require('cheerio');
 var http = require('http');
 
 const PORT = 80;
-var server = http.createServer(handleRequest);
-
-server.listen(PORT, function() {
-    console.log("The web server started and is listening on: http://localhost:%s", PORT);
-});
+var server = http.createServer(handleRequest).listen(PORT);
 
 function handleRequest(req, response){
       var loginDetails = {
