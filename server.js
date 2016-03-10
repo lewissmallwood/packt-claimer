@@ -1,7 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var http = require('http');
-var url = require('url');
+var urlImported = require('url');
 
 const PORT = 80;
 http.createServer(handleRequest).listen(PORT);
@@ -21,7 +21,7 @@ function handleRequest(req, response) {
       var bookTitle;
 
       // Take the email and password for Packt via a very unsecure GET request and use it.
-      var query = url.parse(req.url, true).query;
+      var query = urlImported.parse(req.url, true).query;
       loginDetails.email = query.email;
       loginDetails.password = query.password;
 
