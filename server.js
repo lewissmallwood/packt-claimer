@@ -3,7 +3,11 @@ var cheerio = require('cheerio');
 var http = require('http');
 
 const PORT = 80;
-var server = http.createServer(handleRequest).listen(PORT);
+
+http.createServer((req, response) => {
+  response.writeHead(200, {'Content-Type': 'text/plain'});
+  response.end('Hello World\n');
+}).listen(PORT);
 
 function handleRequest(req, response){
       var loginDetails = {
