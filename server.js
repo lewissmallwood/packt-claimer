@@ -2,11 +2,21 @@ var request = require('request');
 var cheerio = require('cheerio');
 var http = require('http');
 var urlImported = require('url');
+var fs = require('fs');
 
 const PORT = 80;
 http.createServer(handleRequest).listen(PORT);
 
 function handleRequest(req, response) {
+      if (req.url == "/favicon.ico") {
+          var icon = fs.readFileSync('./favicon.ico');
+          response.writeHead(200, {"Content-Type": "image/x-icon"});
+          response.end(icon, 'binary');
+          return;
+      }
+
+      response.writeHead(200, {'Content-Type': 'text/plain'});
+
       var loginDetails = {
           email: "",
           password: "",
@@ -35,6 +45,7 @@ function handleRequest(req, response) {
       request(url, function(err, res, body) {
           if (err) {
               console.error('Request failed');
+              response.write('Something broke...\n');
               console.log('----------- Packt Grab Done --------------');
               return;
           }
@@ -57,6 +68,7 @@ function handleRequest(req, response) {
           }, function(err, res, body) {
               if (err) {
                   console.error('Login failed');
+                  response.write('Logining into your Packt account failed.\n');
                   console.log('----------- Packt Grab Done --------------');
                   return;
               };
@@ -64,6 +76,7 @@ function handleRequest(req, response) {
               var loginFailed = $("div.error:contains('"+loginError+"')");
               if (loginFailed.length) {
                   console.error('Login failed, please check your email address and password.');
+                  response.write('Logining into your Packt account failed. Perhaps no credentials were supplied?\n');
                   console.log('----------- Packt Grab Done --------------');
                   return;
               }
@@ -71,6 +84,7 @@ function handleRequest(req, response) {
               request('https://www.packtpub.com' + getBookUrl, function(err, res, body) {
                   if (err) {
                       console.error('Request Error');
+                      response.write('An unexpected request error occurred.\n');
                       console.log('----------- Packt Grab Done --------------');
                       return;
                   }
@@ -78,12 +92,10 @@ function handleRequest(req, response) {
                   var $ = cheerio.load(body);
 
                   console.log('Book Title: ' + bookTitle);
+                  response.write("The book '"+ bookTitle +"' was claimed successfully for "+ loginDetails.email +".\n");
                   console.log('Claim URL: https://www.packtpub.com' + getBookUrl);
                   console.log('----------- Packt Grab Done --------------');
               });
           });
       });
-
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('It Works!! Path Hit: ' + req.url + '\n');
 }
