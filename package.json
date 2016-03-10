@@ -1,0 +1,13 @@
+{
+  "name": "PacktGrabber",
+  "version": "1.0.0",
+  "description": "Claiming your book automagically from Packt.",
+  "main": "server.js",
+  "repository": "",
+  "author": "Lewis Smallwood",
+  "dependencies": {
+    "cheerio": "latest",
+    "dotenv": "^1.1.0",
+    "request": "latest"
+  }
+}
