@@ -4,12 +4,12 @@ var http = require('http');
 
 const PORT = 80;
 
-http.createServer((req, response) => {
+http.createServer(function(req, response) {
   response.writeHead(200, {'Content-Type': 'text/plain'});
   response.end('Hello World\n');
 }).listen(PORT);
 
-function handleRequest(req, response){
+function handleRequest(req, response) {
       var loginDetails = {
           email: "",
           password: "",
