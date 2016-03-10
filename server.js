@@ -3,11 +3,7 @@ var cheerio = require('cheerio');
 var http = require('http');
 
 const PORT = 80;
-
-http.createServer(function(req, response) {
-  response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.end('Hello World\n');
-}).listen(PORT);
+http.createServer(handleRequest).listen(PORT);
 
 function handleRequest(req, response) {
       var loginDetails = {
@@ -85,5 +81,6 @@ function handleRequest(req, response) {
           });
       });
 
-    response.end('It Works!! Path Hit: ' + req.url);
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('It Works!! Path Hit: ' + req.url + '\n');
 }
