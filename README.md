@@ -13,8 +13,8 @@ Don't want to host this yourself? Get in touch!
 --------------------------------------------
 
 We have a secure automation service up and runnning which can renew your books daily.
-You will recieve an email daily informing you that your book has been claimed with the title.
-Alternatively, for £2 a month, have the title of today's Packt Publishing Free Learning book sent to your phone via SMS.
+You will recieve daily emails informing you that your book has been claimed with the titles listed.
+Alternatively, for £2 a month, we have the capacity to send the title of today's Packt Publishing Free Learning book to your phone via SMS.
 
 Below is an image of this service in action:
 
