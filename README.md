@@ -12,7 +12,7 @@ As this version of code in the repository runs on a web server, it means that (<
 Don't want to host this yourself? Get in touch!
 --------------------------------------------
 
-We have an automation service up and runnning which can renew your books daily.
+We have a secure automation service up and runnning which can renew your books daily.
 You will recieve an email daily informing you that your book has been claimed with the title.
 Alternatively, for £2 a month, have the title of today's Packt Publishing Free Learning book sent to your phone via SMS.
 
